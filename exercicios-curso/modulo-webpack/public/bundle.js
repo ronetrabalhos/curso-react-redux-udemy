@@ -44,16 +44,27 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	console.log('Webpack iniciado com sucesso!');
+	console.log('[index.js] Webpack iniciado com sucesso!');
+
 
 	/* 
 	logger.js 
 
 	Quando se tratar dos meus arquivos, referencio com caminho relativo ./
-	Sendo do node_modules basta inserir o nome
+	Sendo do node_modules basta inserir o nome  :)
 	*/
 	const logger = __webpack_require__( 1 );
-	logger.info("Usando o padrão CommonsJS");
+	logger.info("[index.js] Usando o padrão CommonsJS");
+
+
+	/* 
+	duvidaCruel.js
+	Referenciando o arquivo para que ele seja carregado e apareça no bundle.js
+	quando for compilada a aplicação.
+	A aula 10 vem mostrar isso, se o arquivo não for referenciado ele não tem 
+	saída na aplicação.
+	*/
+	__webpack_require__(2);
 
 /***/ },
 /* 1 */
@@ -77,6 +88,12 @@
 	*/
 
 	module.exports = { info }
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	console.log('[duvidaCruel.js] Sou carregado?');
 
 /***/ }
 /******/ ]);

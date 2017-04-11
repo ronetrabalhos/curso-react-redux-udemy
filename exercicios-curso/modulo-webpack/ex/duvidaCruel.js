@@ -1,1 +1,1 @@
-console.log('Sou carregado?');
+console.log('[duvidaCruel.js] Sou carregado?');
