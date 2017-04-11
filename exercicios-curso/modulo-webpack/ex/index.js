@@ -1,4 +1,4 @@
-console.log('[index.js] Webpack iniciado com sucesso!');
+console.log('[index.js] - Webpack iniciado com sucesso!');
 
 // ============================================================================
 
@@ -10,7 +10,7 @@ Sendo do node_modules basta inserir o nome  :)
 */
 
 const logger = require( './logger' );
-logger.info("[index.js] Usando o padrão CommonsJS");
+logger.info("[index.js] - Usando o padrão CommonsJS");
 
 // ============================================================================
 
@@ -27,5 +27,15 @@ são dependências deste.
 */
 
 require('./duvidaCruel');
+
+// ============================================================================
+
+// Importando a classe Pessoa.js
+import Pessoa from './pessoa'
+
+// Instanciando Pessoa
+const pessoa = new Pessoa('Guilherme');
+console.log('[index.js] - ' + pessoa.toString());
+
 
 // ============================================================================
