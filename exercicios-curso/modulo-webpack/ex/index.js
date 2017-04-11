@@ -37,5 +37,35 @@ import Pessoa from './pessoa'
 const pessoa = new Pessoa('Guilherme');
 console.log('[index.js] - ' + pessoa.toString());
 
+// ============================================================================
+
+// Objeto produto
+
+const produto = {
+    nome: 'Caneta Bic Preta',
+    preco: 1.90,
+    desconto: 0.05
+}
+
+
+/* A função clona um objeto recebido como parâmetro e faz isso através do uso
+   do operador spread (espalhar)
+*/
+
+function clonar (objeto){
+    return { ...objeto }   // Como  retorno está entre { } ele retorna um objeto
+}
+
+
+// Criando um clone de produto e alterando somente o nome do produto
+
+const novoProduto = clonar(produto);
+novoProduto.nome = 'Caneta Bic Azul';
+
+// Imprimindo o resultado
+console.log (produto);
+console.log (novoProduto);
+
+
 
 // ============================================================================

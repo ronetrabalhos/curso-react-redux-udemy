@@ -28,7 +28,8 @@ module.exports = {
             loader: 'babel-loader',       /* qual loader iremos utilizar para a tarefa. Essa dependência deve instalada e referenciada no arquivo package.json */
             exclude: /node_module/,     /* queremos apenas que o Babel leia os js de nossa aplicação, por isso retiramos a pastanode_module  */
             query: {                    /* dentro de query definimos o que será interpretado pelo Babel interprete */
-                presets: ['es2015']
+                presets: ['es2015'],
+                plugins: ['transform-object-rest-spread']  /* plugin spread */
             }
         }]
     }
