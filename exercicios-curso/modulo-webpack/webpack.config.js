@@ -3,6 +3,9 @@
 
 const webpack = require('webpack')
 
+/* Este plugin é responsável por interpretar arquivos .css */
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 /* Exports é utilizado para deixar as declarações desse módulo 
    visíveis fora deste arquivo  
    Aqui está declarado o ponto de entrada para a aplicação;
@@ -22,6 +25,10 @@ module.exports = {
 
     },
 
+    plugins: [
+        new ExtractTextPlugin('app.css')   /* Nome do arquivo que será gerado após interpretar o csss*/
+    ],
+
     module: {
         loaders: [{                     /* loaders são responsáveis por carregar os arquivos que resolverão nosso problemas, como o Babel*/
             test: /.js?$/,              /* tipo de arquivo que será carregado */
@@ -31,6 +38,9 @@ module.exports = {
                 presets: ['es2015', 'react'],
                 plugins: ['transform-object-rest-spread']  /* plugin spread */
             }
+        }, {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
         }]
     }
 

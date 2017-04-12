@@ -79,3 +79,9 @@ export default props => (
 );
 
 console.log('[index.js] - React instanciado com sucesso!')
+
+
+// ============================================================================
+
+// Importando o css
+import './estilo.css';
