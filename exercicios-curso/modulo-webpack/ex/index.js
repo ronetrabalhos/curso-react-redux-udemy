@@ -69,3 +69,13 @@ console.log (novoProduto);
 
 
 // ============================================================================
+
+// Importando o react
+
+import 'react';
+
+export default props => (
+    <h1> Olá </h1>
+);
+
+console.log('[index.js] - React instanciado com sucesso!')
