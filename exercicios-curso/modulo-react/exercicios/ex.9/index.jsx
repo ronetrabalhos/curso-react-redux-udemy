@@ -17,6 +17,7 @@ ReactDOM.render(
     , document.getElementById('app')
 )
 
+console.log('---');
 
 /*
 ReactDOM.render(
