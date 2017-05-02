@@ -21,5 +21,4 @@ export default props => (
         </div>
 
     </nav>
-
 )
