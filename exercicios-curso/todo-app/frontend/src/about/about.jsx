@@ -56,6 +56,5 @@ export default props => (
             like Aldus PageMaker including versions of Lorem Ipsum.
         </p>
 
-
     </div>
 )
