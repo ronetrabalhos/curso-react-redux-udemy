@@ -32,6 +32,10 @@ export default class Todo extends Component{
         // Bind das funções
         this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
+
+        // Iniciando funções
+        this.refresh();
 
     }
 
@@ -51,7 +55,7 @@ export default class Todo extends Component{
         // Como o Axios é baseado em promise, é possível utilizar
         // o método then para recuperar a resposta da ação
         Axios.post(URL, { description })
-             .then(resp => console.log('Funcionou: ' + description))
+             .then(resp => this.refresh())
     }
 
     // Monitorar o campo de descrição da tarefa
@@ -65,6 +69,23 @@ export default class Todo extends Component{
         this.setState( { ...this.state, description: e.target.value } )
     }
 
+    // Pega a lista mais atualizada 
+    refresh(){
+
+        // Passamos a URL e passamos um filtro pedindo para ordenar 
+        // pela data de criação em ordem decrescente
+        // O último lançado aparecerá primeiro
+        // O .then receberá a resposta e alterará o estado do this
+        Axios.get(`${URL}?sort=-createAt`)
+             .then(resp => this.setState( { ...this.state, description: '', list: resp.data } ) )
+
+    }
+
+    // remover elemento
+    handleRemove(todo){
+        Axios.delete( ` ${URL}/${todo._id}` )
+             .then( resp => this.refresh() )
+    }
 
 
     // ================================================
@@ -79,7 +100,9 @@ export default class Todo extends Component{
                     description = { this.state.description }
                     handleChange = { this.handleChange }
                     handleAdd = { this.handleAdd } />
-                <TodoList />
+                <TodoList 
+                    list = { this.state.list }  
+                    handleRemove = { this.handleRemove }/>
             </div>
         )
     }
