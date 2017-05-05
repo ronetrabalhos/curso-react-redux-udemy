@@ -1,8 +1,19 @@
+// Import de biblioteca de terceiros
 import React, { Component } from 'react'
+import Axios from 'axios'
+
+// Import de bibliotecas e componentes internos da app
 import PageHeader from '../template/pageHeader'
 import TodoForm from './todoForm'
 import TodoList from './todoList'
 
+
+// Constante com a URL Base da api no backend
+const URL = 'http://localhost:3003/api/todos'
+
+
+
+// Classe Todo
 export default class Todo extends Component{
 
     // Construtor
@@ -22,7 +33,6 @@ export default class Todo extends Component{
         this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
 
-
     }
 
     // ================================================
@@ -31,7 +41,17 @@ export default class Todo extends Component{
     
     // Adicionar nova tarefa
     handleAdd() {
-        console.log(this.state.description)
+        
+        // A constante description receberá o valor
+        // armazernado em this.state
+        const description = this.state.description
+
+        // Após utilizamos o Axios para realizar a tarefa de 
+        // inserir o novo registro
+        // Como o Axios é baseado em promise, é possível utilizar
+        // o método then para recuperar a resposta da ação
+        Axios.post(URL, { description })
+             .then(resp => console.log('Funcionou: ' + description))
     }
 
     // Monitorar o campo de descrição da tarefa
