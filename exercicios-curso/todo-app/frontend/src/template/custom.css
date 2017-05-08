@@ -1,0 +1,14 @@
+/*
+    Este arquivo está referenciado em app.jsx,
+    pois ele precisa ser instanciado no arquivo raiz
+    da aplicação para que ele seja agrupado ao 
+    webpack.
+*/
+.btn{ 
+    margin-right: 5px;
+}
+
+.markedAsDone{
+    text-decoration: line-through;
+    color: #dedede;
+}

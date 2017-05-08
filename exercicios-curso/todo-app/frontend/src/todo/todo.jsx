@@ -33,6 +33,9 @@ export default class Todo extends Component{
         this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
+        this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
+        this.handleMarkAsPeding = this.handleMarkAsPeding.bind(this)
+
 
         // Iniciando funções
         this.refresh();
@@ -58,6 +61,23 @@ export default class Todo extends Component{
              .then(resp => this.refresh())
     }
 
+    // Marcar tarefa como realizada
+    handleMarkAsDone(todo){
+        
+        // [ ...todo ] possui o elemento todo com todas as caracteristicas
+        // [ done: true ] muda o valor deste atributo neste novo objeto que 
+        // esta sendo criado.
+        Axios.put(`${URL}/${todo._id}`, { ...todo, done: true })
+             .then(resp => this.refresh())
+    }
+
+    // Voltar o estado da tarefa para não concluída
+    handleMarkAsPeding(todo){
+        Axios.put(`${URL}/${todo._id}`, {...todo, done: false })
+             .then(resp => this.refresh())
+    }
+
+
     // Monitorar o campo de descrição da tarefa
     // recebendo como parâmetro o [e]vento do 
     // onChange
@@ -68,6 +88,7 @@ export default class Todo extends Component{
         // description e associaremos o seu valor a e.target.value
         this.setState( { ...this.state, description: e.target.value } )
     }
+
 
     // Pega a lista mais atualizada 
     refresh(){
@@ -102,6 +123,8 @@ export default class Todo extends Component{
                     handleAdd = { this.handleAdd } />
                 <TodoList 
                     list = { this.state.list }  
+                    handleMarkAsDone = { this.handleMarkAsDone }
+                    handleMarkAsPeding = { this.handleMarkAsPeding }
                     handleRemove = { this.handleRemove }/>
             </div>
         )
