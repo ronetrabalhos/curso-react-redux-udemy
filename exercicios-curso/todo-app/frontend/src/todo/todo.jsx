@@ -32,7 +32,6 @@ export default class Todo extends Component{
         // Bind das funções
         this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleSearch = this.handleSearch.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
         this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
         this.handleMarkAsPeding = this.handleMarkAsPeding.bind(this)
@@ -69,13 +68,13 @@ export default class Todo extends Component{
         // [ done: true ] muda o valor deste atributo neste novo objeto que 
         // esta sendo criado.
         Axios.put(`${URL}/${todo._id}`, { ...todo, done: true })
-             .then(resp => this.refresh(this.state.description))
+             .then(resp => this.refresh())
     }
 
-    // Voltar o estado da tarefa para não concluída (pendente)
-    handleMarkAsPending(todo){
+    // Voltar o estado da tarefa para não concluída
+    handleMarkAsPeding(todo){
         Axios.put(`${URL}/${todo._id}`, {...todo, done: false })
-             .then(resp => this.refresh(this.state.description))
+             .then(resp => this.refresh())
     }
 
 
@@ -90,44 +89,23 @@ export default class Todo extends Component{
         this.setState( { ...this.state, description: e.target.value } )
     }
 
-    // Busca na lista
-    // Feitas as alterações na função refresh(), basta passar para ela
-    // o conteúdo da caixa de pesquisa e ela atualiza a lista
-    handleSearch(){
-        this.refresh(this.state.description)
-    }
-
 
     // Pega a lista mais atualizada 
-    // [ description = '' ] foi inserido para que possamos realizar 
-    // busca na lista de tarefas
-    refresh(description = ''){
+    refresh(){
 
         // Passamos a URL e passamos um filtro pedindo para ordenar 
         // pela data de criação em ordem decrescente
         // O último lançado aparecerá primeiro
         // O .then receberá a resposta e alterará o estado do this
-
-        // Para que tenhamos a pesquisa no mesmo campo de inserção
-        // é necessário alterar a função, para que o nodejs retorne
-        // os elementos que buscamos. Para isso criamos a constante 
-        // search. Ela será concatenada a URL.
-
-        // No .then limpávamos a caixa após inserção [ description: '', ...] 
-        // Porém, como a busca agora é realizada no mesmo campo, teremos 
-        // que passar o estado description, visto que ele é declarado como 
-        // parâmetro da função. Se for para limpar, não informe nada.
-
-        const search = description ? `&description__regex=/${ description }/` : ''
-        Axios.get(`${URL}?sort=-createAt${ search }`)
-             .then(resp => this.setState( { ...this.state, description, list: resp.data } ) )
+        Axios.get(`${URL}?sort=-createAt`)
+             .then(resp => this.setState( { ...this.state, description: '', list: resp.data } ) )
 
     }
 
     // remover elemento
     handleRemove(todo){
         Axios.delete( ` ${URL}/${todo._id}` )
-             .then( resp => this.refresh(this.state.description) )
+             .then( resp => this.refresh() )
     }
 
 
@@ -142,8 +120,7 @@ export default class Todo extends Component{
                 <TodoForm 
                     description = { this.state.description }
                     handleChange = { this.handleChange }
-                    handleAdd = { this.handleAdd }
-                    handleSearch = { this.handleSearch } />
+                    handleAdd = { this.handleAdd } />
                 <TodoList 
                     list = { this.state.list }  
                     handleMarkAsDone = { this.handleMarkAsDone }
