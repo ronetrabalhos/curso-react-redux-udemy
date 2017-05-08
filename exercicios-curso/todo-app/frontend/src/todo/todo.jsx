@@ -33,6 +33,7 @@ export default class Todo extends Component{
         this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
+        this.handleClear = this.handleClear.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
         this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
         this.handleMarkAsPending = this.handleMarkAsPending.bind(this)
@@ -130,6 +131,11 @@ export default class Todo extends Component{
              .then( resp => this.refresh(this.state.description) )
     }
 
+    // limpar campo de pesquisa e retornar todos os registros
+    handleClear(){
+        this.refresh()
+    }
+
 
     // ================================================
     // FUNÇÃO PRINCIPAL
@@ -140,15 +146,18 @@ export default class Todo extends Component{
             <div>
                 <PageHeader name='Tarefas' small='Cadastro'> </PageHeader>
                 <TodoForm 
-                    description = { this.state.description }
-                    handleChange = { this.handleChange }
-                    handleAdd = { this.handleAdd }
-                    handleSearch = { this.handleSearch } />
+                    description = { this.state.description }  // parâmetro do input
+                    handleChange = { this.handleChange }      // escuta o onChange
+                    handleAdd = { this.handleAdd }            // adicionar
+                    handleSearch = { this.handleSearch }      // consultar
+                    handleClear = { this.handleClear }        // limpar
+                    />     
                 <TodoList 
-                    list = { this.state.list }  
-                    handleMarkAsDone = { this.handleMarkAsDone }
-                    handleMarkAsPending = { this.handleMarkAsPending }
-                    handleRemove = { this.handleRemove }/>
+                    list = { this.state.list }                              // lista
+                    handleMarkAsDone = { this.handleMarkAsDone }            // marcar como feito
+                    handleMarkAsPending = { this.handleMarkAsPending }      // marcar como pendente
+                    handleRemove = { this.handleRemove }                    // remover da lista
+                    />                 
             </div>
         )
     }
