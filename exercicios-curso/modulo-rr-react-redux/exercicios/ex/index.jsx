@@ -4,6 +4,7 @@ import { combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 import Field from './field'
+import fieldReducer from './fieldReducer'
 
 /*
 field é um parâmetro e será atribuído a ele uma [função reducers],
@@ -19,7 +20,8 @@ atualizada do estado
 
 */
 const reducers = combineReducers({
-    field: () => ( { value: 'opa' } )
+    //field: () => ( { value: 'opa' } )
+    field: fieldReducer
 })
  
 ReactDOM.render(
