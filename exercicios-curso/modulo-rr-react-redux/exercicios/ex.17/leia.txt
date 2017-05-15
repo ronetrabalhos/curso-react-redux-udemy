@@ -1,1 +1,1 @@
-Aula 67 - Ex02 - Integrando o React-Redux (Parte 1)
+Aula 68 - Ex02 - Integrando o React-Redux (Parte 2)
