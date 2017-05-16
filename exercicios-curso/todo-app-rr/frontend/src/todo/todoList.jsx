@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import IconButton from '../template/iconButton'
 
-export default props => {
+const TodoList = props => {
 
     // Função auxiliar
     const renderRows = () => {
@@ -62,3 +63,12 @@ export default props => {
 
     )
 }
+
+// mapeamento do estado do redux com as propriedades do objeto
+// o todo.list refere-se ao todo + list declaro no arquivo ./main/reducers.js
+const mapStateToProps = state => ({list: state.todo.list})
+
+
+// exportar o componente TodoList utilizando o decorator [ connect ] 
+// integrar o redux utilizando o connect 
+export default connect(mapStateToProps)(TodoList)
