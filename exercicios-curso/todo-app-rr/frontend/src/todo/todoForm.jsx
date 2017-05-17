@@ -1,9 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
 import Grid  from '../template/grid'
 import IconButton  from '../template/iconButton'
 
 
-export default props => {
+const todoForm = props => {
 
     // Esta função adiciona teclas de atalho ao formulário
     const keyHandler = (e) => {
@@ -54,3 +56,7 @@ export default props => {
     )
 
 }
+
+// mapeamento e exportação com redux
+const mapStateToProps = state => ({ description : state.todo.description })
+export default connect(mapStateToProps)(todoForm)
