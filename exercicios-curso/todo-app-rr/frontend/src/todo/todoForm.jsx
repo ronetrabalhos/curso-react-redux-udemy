@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import Grid  from '../template/grid'
 import IconButton  from '../template/iconButton'
-import { changeDescription, search } from './todoActions'
+import { add, changeDescription, search } from './todoActions'
 
 
 // Mudando de componente funcional para Classe
@@ -29,8 +29,11 @@ class TodoForm extends Component {
 
     // Método KeyHandler
     keyHandler(e) {
+
+        const { add, search, description } = this.props
+
         if( e.key === 'Enter' ){
-            e.shiftKey ? props.handleSearch() : props.handleAdd()
+            e.shiftKey ? search() : add(description)
         }
         else if ( e.key === 'Escape' ){
             props.handleClear()
@@ -38,6 +41,9 @@ class TodoForm extends Component {
     }
 
     render(){ 
+        
+        const { add, search, description } = this.props
+
         return (
             <div role='form' className='todoForm'>  
 
@@ -56,13 +62,13 @@ class TodoForm extends Component {
                     <IconButton 
                             style='primary' 
                             icon='plus' 
-                            onClick = { this.props.handleAdd } > 
+                            onClick = { () => add(description) } > 
                         </IconButton>         
 
                     <IconButton 
                             style='info' 
                             icon='search' 
-                            onClick = { this.props.handleSearch } > 
+                            onClick = { () => search() } > 
                         </IconButton>  
 
                     <IconButton 
@@ -83,7 +89,7 @@ class TodoForm extends Component {
 // mapeamento e exportação com redux
 const mapStateToProps = state => ({ description : state.todo.description })
 const mapDispatchToProps = dispach => bindActionCreators(
-    { changeDescription, search }, 
+    { add, changeDescription, search }, 
     dispach 
 )
 
