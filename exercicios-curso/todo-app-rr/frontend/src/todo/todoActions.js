@@ -10,7 +10,7 @@ export const changeDescription = (event) => ({
 
 // actionCreator para buscar os serviços do backend
 export const search = () => {
-    const request = axios.get(`${URL}?sort=-createdAT`)
+    const request = axios.get(`${URL}?sort=-createAt`)
     return {
         type    : 'TODO_SEARCHED',
         payload : request
@@ -20,9 +20,9 @@ export const search = () => {
 // actionCreator para inserir novo registro na lista
 export const add = (description) => {
     const request = axios.post( URL, { description } )
-    return {
-        type    : 'TODO_ADDED',
-        payload : request
-    }
+    return [
+        { type : 'TODO_ADDED', payload : request }, // dispara evento de adicionar
+        search()   // dispara a atualização da lista
+    ]
 }
 
