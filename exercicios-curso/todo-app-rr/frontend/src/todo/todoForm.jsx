@@ -30,6 +30,8 @@ class TodoForm extends Component {
     // Método KeyHandler
     keyHandler(e) {
 
+        // Extrair do atributo props os métodos add, search e description
+        // Essa é uma nomeclatura do AE 2015 
         const { add, search, description } = this.props
 
         if( e.key === 'Enter' ){

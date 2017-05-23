@@ -24,6 +24,5 @@ export const add = (description) => {
         type    : 'TODO_ADDED',
         payload : request
     }
-
 }
 
