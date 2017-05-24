@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import Grid  from '../template/grid'
 import IconButton  from '../template/iconButton'
-import { add, changeDescription, search } from './todoActions'
+import { add, changeDescription, search, clear } from './todoActions'
 
 
 // Mudando de componente funcional para Classe
@@ -32,13 +32,13 @@ class TodoForm extends Component {
 
         // Extrair do atributo props os métodos add, search e description
         // Essa é uma nomeclatura do AE 2015 
-        const { add, search, description } = this.props
+        const { add, search, description, clear } = this.props
 
         if( e.key === 'Enter' ){
             e.shiftKey ? search() : add(description)
         }
         else if ( e.key === 'Escape' ){
-            props.handleClear()
+            clear()
         }
     }
 
@@ -76,7 +76,7 @@ class TodoForm extends Component {
                     <IconButton 
                             style='default' 
                             icon='close' 
-                            onClick = { this.props.handleClear } > 
+                            onClick = { this.props.clear } > 
                         </IconButton>  
 
                 </Grid>
@@ -91,7 +91,7 @@ class TodoForm extends Component {
 // mapeamento e exportação com redux
 const mapStateToProps = state => ({ description : state.todo.description })
 const mapDispatchToProps = dispach => bindActionCreators(
-    { add, changeDescription, search }, 
+    { add, changeDescription, search, clear }, 
     dispach 
 )
 
