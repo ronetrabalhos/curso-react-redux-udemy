@@ -54,3 +54,37 @@ export const add = (description) => {
     }
 
 }
+
+
+// ====================================================================
+// ACTION PARA MARCAR / DESMARCAR TAREFA COMO CONCLUÍDA
+// ====================================================================
+/*
+   As linhas:
+   .then(resp => dispatch( { type: 'TODO_MARKED_AS_DONE', payload: resp.data }))
+   .then( resp => dispatch( { type: 'TODO_MARKED_AS_PENDING', payload: resp.data } ))
+   
+   foram adicioandas apenas para mostrar que caso fosse necessário disparar mais de uma
+   action, seria esse o formato que assumiria a instrução.
+   É possível observar que elas não foram utilizadas, pois não há referências a elas em
+   todoReducer.js
+   Para o exercício, ela foi interessante, pois é possível ver pelo console redux a ordem
+   do disparo das actions
+*/
+
+
+export const markAsDone = (todo) => {
+    return dispatch => {
+        axios.put( `${URL}/${todo._id}` , { ...todo, done: true } )
+             .then(resp => dispatch( { type: 'TODO_MARKED_AS_DONE', payload: resp.data }))
+             .then(resp => dispatch( search() ) )
+    }
+}
+
+export const markAsPending = (todo) => {
+    return dispatch => {
+        axios.put(`${URL}/${todo._id}`, { ...todo, done: false })
+             .then( resp => dispatch( { type: 'TODO_MARKED_AS_PENDING', payload: resp.data } ))
+             .then( resp => dispatch(search() ) )
+    }
+}

@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import IconButton from '../template/iconButton'
+import { markAsDone, markAsPending } from './todoActions'
 
 const TodoList = props => {
 
@@ -22,14 +25,14 @@ const TodoList = props => {
                         style = 'success' 
                         icon = 'check'
                         hide = { todo.done }
-                        onClick = {() => props.handleMarkAsDone(todo)}>
+                        onClick = {() => props.markAsDone(todo)}>
                     </IconButton>
 
                     <IconButton 
                         style = 'warning' 
                         icon = 'undo'
                         hide = { !todo.done }
-                        onClick = {() => props.handleMarkAsPending(todo)}>
+                        onClick = {() => props.markAsPending(todo)}>
                     </IconButton>
 
                     <IconButton 
@@ -67,8 +70,10 @@ const TodoList = props => {
 // mapeamento do estado do redux com as propriedades do objeto
 // o todo.list refere-se ao todo + list declaro no arquivo ./main/reducers.js
 const mapStateToProps = state => ({list: state.todo.list})
+const mapDispatchToProps = (dispatch) => 
+      bindActionCreators( { markAsDone, markAsPending }, dispatch)
 
 
 // exportar o componente TodoList utilizando o decorator [ connect ] 
 // integrar o redux utilizando o connect 
-export default connect(mapStateToProps)(TodoList)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
