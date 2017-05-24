@@ -63,6 +63,7 @@ export const add = (description) => {
    As linhas:
    .then(resp => dispatch( { type: 'TODO_MARKED_AS_DONE', payload: resp.data }))
    .then( resp => dispatch( { type: 'TODO_MARKED_AS_PENDING', payload: resp.data } ))
+   .then( resp => dispatch( { type: 'TODO_REMOVE', payload: resp.data } ))
    
    foram adicioandas apenas para mostrar que caso fosse necessário disparar mais de uma
    action, seria esse o formato que assumiria a instrução.
@@ -86,5 +87,13 @@ export const markAsPending = (todo) => {
         axios.put(`${URL}/${todo._id}`, { ...todo, done: false })
              .then( resp => dispatch( { type: 'TODO_MARKED_AS_PENDING', payload: resp.data } ))
              .then( resp => dispatch(search() ) )
+    }
+}
+
+export const remove = (todo) => {
+    return dispatch => {
+        axios.delete(`${URL}/${todo._id}`)
+             .then( resp => dispatch( { type: 'TODO_REMOVE', payload: resp.data } ))
+             .then( resp => dispatch( search() ))
     }
 }

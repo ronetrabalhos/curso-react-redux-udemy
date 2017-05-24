@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import IconButton from '../template/iconButton'
-import { markAsDone, markAsPending } from './todoActions'
+import { markAsDone, markAsPending, remove } from './todoActions'
 
 const TodoList = props => {
 
@@ -39,7 +39,7 @@ const TodoList = props => {
                         style = 'danger' 
                         icon = 'trash-o'
                         hide = { !todo.done }
-                        onClick = {() => props.handleRemove(todo)}>
+                        onClick = {() => props.remove(todo)}>
                     </IconButton>                    
 
                 </td>
@@ -71,7 +71,7 @@ const TodoList = props => {
 // o todo.list refere-se ao todo + list declaro no arquivo ./main/reducers.js
 const mapStateToProps = state => ({list: state.todo.list})
 const mapDispatchToProps = (dispatch) => 
-      bindActionCreators( { markAsDone, markAsPending }, dispatch)
+      bindActionCreators( { markAsDone, markAsPending, remove }, dispatch)
 
 
 // exportar o componente TodoList utilizando o decorator [ connect ] 
