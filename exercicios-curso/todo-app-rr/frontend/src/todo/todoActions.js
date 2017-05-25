@@ -12,10 +12,16 @@ export const changeDescription = (event) => ({
 // actionCreator para buscar os serviços do backend
 // retorna um objeto, com um tipo type, que representa uma action
 export const search = () => {
-    const request = axios.get(`${URL}?sort=-createAt`)
-    return {
-        type    : 'TODO_SEARCHED',
-        payload : request
+
+    // utilizando redux-thunk para resolver o problema de marcar tarefa
+    // como concluída ou não e manter o filtro do item pesquisado
+    // além do dispatch vamos utilizar o método getState
+
+    return (dispatch, getState) => {
+        const description = getState().todo.description
+        const search = description ? `&description__regex=/${ description }/` : ''
+        const request = axios.get(`${URL}?sort=-createAt${search}`)
+              .then(resp => dispatch( { type: 'TODO_SEARCHED', payload: resp.data } ))
     }
 }
 
@@ -103,5 +109,5 @@ export const remove = (todo) => {
 }
 
 export const clear = () => {
-    return { type: 'TODO_CLEAR'}
+    return [{ type: 'TODO_CLEAR'}, search()]
 }
