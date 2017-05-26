@@ -11,3 +11,5 @@ server.use(bodyParser.json())
 server.listen(port, function(){
     console.log(`[ MY-MONEY-APP ] [ BACKEND ] Rodando na porta ${port}.`)
 })
+
+module.exports = server
