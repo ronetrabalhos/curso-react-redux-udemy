@@ -28,7 +28,7 @@ const creditSchema = new mongoose.Schema({
 // Schema para Débito
 const debtSchema = new mongoose.Schema({
     name    : { type: String, required: true },
-    value   : { type: Number, required: true, min: 0},
+    value   : { type: Number, required: [true, 'Informe o valor do débito!'], min: 0},
     status  : { type: String,
                 required: false,
                 uppercase: true,
