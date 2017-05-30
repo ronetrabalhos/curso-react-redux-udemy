@@ -11,7 +11,7 @@ mongoose.Error.Messages.Number.min =
 "O valor '{VALUE}' informado é menor que o limite mínimo de '{MIN}'. "
 
 mongoose.Error.Messages.Number.max =
-"O valor '{VALUE}' informado é menor que o limite mínimo de '{MAX}'. "
+"O valor '{VALUE}' informado é maior que o limite mínimo de '{MAX}'. "
 
 mongoose.Error.Messages.Number.enum =
 "O valor '{VALUE}' não é válido para o atributo '{PATH}'. "
