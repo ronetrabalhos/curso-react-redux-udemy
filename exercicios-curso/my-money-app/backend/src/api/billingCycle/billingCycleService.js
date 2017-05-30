@@ -1,9 +1,16 @@
 // Definição dos serviços rest
 
 const BillingCycle = require('./billingCycle')
+const errorHandler = require('../common/errorHandler')
+
 
 BillingCycle.methods(['get', 'post', 'put', 'delete'])
 BillingCycle.updateOptions({new: true, runValidators: true})
+
+// Aplicando o middleware para tratamento de erro
+BillingCycle.after('post', errorHandler)
+            .after('put',  errorHandler)
+
 
 
 // Criação da rota 'count' que conterá a quantidade de registros
@@ -31,7 +38,9 @@ BillingCycle.route('summary', (req, res, next) => {
                 credit: {$sum: "$credit"}, 
                 debt : {$sum: "$debt"}  }
     }, {
-        $project: { _id: 0, credit: 1, debt: 1}
+        $project: { _id: 0, 
+                 credit: 1, 
+                 debt  : 1}
     }, (error, result) => {
         if(error){
             res.status(500).json({ errors : [error] })
