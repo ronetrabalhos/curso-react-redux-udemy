@@ -1,4 +1,5 @@
 // Este arquivo é um componente react
+import '../common/template/dependencies'
 import React from 'react'
 
 // Tudo o que for exportado a partir de props será o template
