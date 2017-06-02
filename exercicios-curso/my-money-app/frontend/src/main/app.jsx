@@ -6,6 +6,7 @@ import React from 'react'
 import Header  from '../common/template/header'
 import Sidebar from '../common/template/sideBar'
 import Footer  from '../common/template/footer'
+import Routes  from './routes'
 
 
 // Tudo o que for exportado a partir de props será o template
@@ -16,7 +17,7 @@ export default props => (
         <Header /> 
         <Sidebar />
         <div className='content-wrapper'>
-            <h1>Conteúdo [MM] </h1>
+            <Routes/>
         </div>
         <Footer />
     </div>
