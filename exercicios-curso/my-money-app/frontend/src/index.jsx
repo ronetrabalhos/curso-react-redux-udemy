@@ -16,6 +16,8 @@ const store = createStore(reducers)
 
 // O nome do getElementById foi definido no arquivo app.jsx
 ReactDOM.render(
-    <App />, 
-    document.getElementById('app')
+    <Provider store={store}>
+        <App />
+    </Provider>
+    , document.getElementById('app')
 )
