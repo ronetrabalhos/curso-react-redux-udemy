@@ -13,9 +13,13 @@ import promise from 'redux-promise'
 import App from './main/app'
 import reducers from './main/reducers'
 
+// Referenciando o Redux DevTools
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
+              && window.__REDUX_DEVTOOLS_EXTENSION__()
+
 
 // Criação da Store
-const store = applyMiddleware(promise) (createStore) (reducers)
+const store = applyMiddleware(promise) (createStore) (reducers, devTools)
 
 // O nome do getElementById foi definido no arquivo app.jsx
 ReactDOM.render(
