@@ -14,3 +14,4 @@ import 'modules/admin-lte/plugins/iCheck/flat/blue.css'
 
 // import do css customizado
 import './custom.css'
+import './testeJavascript'
